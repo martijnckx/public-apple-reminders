@@ -85,116 +85,116 @@ function sanitiseHtml(input) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${title}</title>
         <style>
-            body,
-            html {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                margin: 0;
-                font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-                color: rgb(55, 53, 47);
-                background: white;
-            }
-            body {
-              display: flex;
-              justify-content: center;
-            }
-            .container {
-              flex-shrink: 0;
-              flex-grow: 1;
-              display: flex;
-              align-items: flex-start;
-              flex-direction: column;
-              font-size: 16px;
-              line-height: 1.5;
+          body,
+          html {
               width: 100%;
-              z-index: 4;
-              margin-top: 24px;
-              max-width: min(721px, 90%);
-            }
-            h1 {
-              max-width: 100%;
-              width: 100%;
-              white-space: pre-wrap;
-              word-break: break-word;
-              padding: 3px 2px;
-              font-weight: 700;
-              line-height: 1.2;
-              margin: 0;
-              margin-bottom: 12px;
-              font-size: 40px;
-            }
-            .alert {
-              background: #ffffcf;
-              color: #bfbf00;
-              padding: 5px 10px;
-              font-weight: bold;
-              margin-bottom: 12px;
-              border-radius: 5px;
-            }
-            p {
-              margin-top: 4px;
-              margin-bottom: 2px;
-            }
-            a {
-              color: inherit;
-              text-decoration: none;
-              position: relative;
-              display: inline-block;
-            }
-            a::before {
-              content: '';
-              position: absolute;
-              bottom: 2px;
-              left: 0;
-              width: 100%;
-              height: 2px;
-              z-index: -1;
-              background: #a3e2ff;
-              transition: all 0.3s ease-in-out;
-            }
-            a:hover::before {
-              bottom: 0;
-              border-radius: 5px;
               height: 100%;
-            }
-            .wishlist {
               padding: 0;
-              width: 100%;
+              margin: 0;
+              font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+              color: rgb(55, 53, 47);
+              background: white;
+          }
+          body {
+            display: flex;
+            justify-content: center;
+          }
+          .container {
+            flex-shrink: 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            font-size: 16px;
+            line-height: 1.5;
+            width: 100%;
+            z-index: 4;
+            margin-top: 24px;
+            max-width: min(721px, 90%);
+          }
+          h1 {
+            max-width: 100%;
+            width: 100%;
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 3px 2px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0;
+            margin-bottom: 12px;
+            font-size: 40px;
+          }
+          .alert {
+            background: #ffffcf;
+            color: #bfbf00;
+            padding: 5px 10px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border-radius: 5px;
+          }
+          p {
+            margin-top: 4px;
+            margin-bottom: 2px;
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+          }
+          a::before {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            z-index: -1;
+            background: #a3e2ff;
+            transition: all 0.3s ease-in-out;
+          }
+          a:hover::before {
+            bottom: 0;
+            border-radius: 5px;
+            height: 100%;
+          }
+          .wishlist {
+            padding: 0;
+            width: 100%;
+          }
+          .wishlist-item {
+            list-style-type: none;
+            padding: 10px 20px;
+            background: rgba(55, 53, 47, 0.06);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+          }
+          .wishlist-item .name {
+            font-size: 18px;
+            font-weight: bold;
+          }
+          .wishlist-item .description {
+            margin-top: 12px;
+            word-break: break-word;
+          }
+          @media (prefers-color-scheme: dark) {
+            html, body {
+                background: rgb(25, 25, 25);
+                color: rgba(255, 255, 255, 0.81);
             }
             .wishlist-item {
-              list-style-type: none;
-              padding: 10px 20px;
-              background: rgba(55, 53, 47, 0.06);
-              border-radius: 10px;
-              margin-bottom: 12px;
-              display: flex;
-              flex-direction: column;
+                background: #ffffff08;
             }
-            .wishlist-item .title {
-              font-size: 18px;
-              font-weight: bold;
+            .alert {
+                background: #ffffe015;
+                color: #ffff6c;
             }
-            .wishlist-item .description {
-              margin-top: 12px;
-              word-break: break-word;
+            a::before {
+              background: #3F51B5;
             }
-            @media (prefers-color-scheme: dark) {
-              html, body {
-                  background: rgb(25, 25, 25);
-                  color: rgba(255, 255, 255, 0.81);
-              }
-              .wishlist-item {
-                  background: #ffffff08;
-              }
-              .alert {
-                  background: #ffffe015;
-                  color: #ffff6c;
-              }
-              a::before {
-                background: #3F51B5;
-              }
-            }
+          }
         </style>
         <!-- Favicon -->
         <link rel="shortcut icon" href="//d107mjio2rjf74.cloudfront.net/web/static/img/favicon.ico"/><link rel="apple-touch-icon" sizes="60x60" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-60x60.png"/><link rel="apple-touch-icon" sizes="76x76" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-76x76.png"/><link rel="apple-touch-icon" sizes="120x120" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-120x120.png"/><link rel="apple-touch-icon" sizes="152x152" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-152x152.png"/><link rel="apple-touch-icon" sizes="180x180" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-180x180.png"/><link rel="apple-touch-icon" href="//d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon.png"/>

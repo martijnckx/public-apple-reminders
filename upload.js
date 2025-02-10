@@ -4,6 +4,17 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+async function triggerBuild() {
+    if (process.env.BUILD_DEPLOY_HOOK) {
+        await fetch(process.env.BUILD_DEPLOY_HOOK, {
+            method: 'POST',
+        });
+        return true;
+    }
+
+    return false;
+}
+
 export default async function uploadReminders(reminders = []) {
     try {
         const client = new S3Client({
@@ -23,6 +34,12 @@ export default async function uploadReminders(reminders = []) {
         }));
 
         console.log('Successfully uploaded reminders to S3');
+
+        if (await triggerBuild()) {
+            console.log('Successfully triggered build');
+        } else {
+            console.log('No build hook found, skipping build');
+        }
     } catch (err) {
         console.error('Error:', err);
     }

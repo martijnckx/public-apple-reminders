@@ -42,13 +42,13 @@ async function updateReminders() {
     if (!hasTmpFile()) {
         console.log('Uploading because no tmp file exists');
         await uploadReminders(reminders);
-    }
+    } else {
+        const tmpReminders = getFromTmp();
 
-    const tmpReminders = getFromTmp();
-
-    if (JSON.stringify(tmpReminders) !== JSON.stringify(reminders)) {
-        console.log('Uploading because reminders have changed');
-        await uploadReminders(reminders);
+        if (JSON.stringify(tmpReminders) !== JSON.stringify(reminders)) {
+            console.log('Uploading because reminders have changed');
+            await uploadReminders(reminders);
+        }
     }
 
     saveToTmp(reminders);

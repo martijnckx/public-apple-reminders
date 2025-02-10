@@ -33,7 +33,7 @@ function sanitiseHtml(input) {
     }
   
     // Convert links
-    markdown = markdown.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+    markdown = markdown.replace(/\[(.*?)\]\((.*?)\)/g, '<a target="_blank" rel="noopener noreferrer" href="$2">$1</a>');
   
     if (withParagraphs) {
       // Convert paragraphs

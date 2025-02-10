@@ -1,0 +1,88 @@
+ObjC.import('stdlib');
+
+let envCache = null;
+
+function loadEnv() {
+    if (envCache !== null) {
+        return envCache;
+    }
+
+    const app = Application.currentApplication();
+    app.includeStandardAdditions = true;
+    
+    try {
+        const currentDir = app.doShellScript('pwd');
+        
+        const envPath = currentDir + '/.env';
+        
+        const envFile = app.read(envPath);
+        
+        envCache = {};
+        
+        if (typeof envFile === 'string') {
+            envFile.split('\n').forEach(line => {
+                line = line.trim();
+                if (line && !line.startsWith('#')) {
+                    const [key, ...values] = line.split('=');
+                    envCache[key.trim()] = values.join('=').trim().replace(/^["']|["']$/g, '');
+                }
+            });
+        } else {
+            console.log("Warning: env file content is not a string, type:", typeof envFile);
+        }
+        
+        return envCache;
+    } catch (e) {
+        console.log("Error loading .env file - Details:", e);
+        envCache = {};
+        return envCache;
+    }
+}
+
+function getEnvVar(key, defaultValue = null) {
+    let sysEnv = null;
+    try {
+        sysEnv = $.getenv(key);
+    } catch (_) {}
+    const env = sysEnv || loadEnv()[key] || defaultValue;
+    return env;
+}
+
+function getReminders() {
+    const reminders = Application("Reminders");
+    const lists = reminders.lists;
+    const listName = getEnvVar('REMINDERS_LIST_NAME');
+
+    if (!listName) return [];
+
+    let wishlist = null;
+    
+    for (let i = 0; i < lists.length; i++) {
+        if (lists[i].name() == listName) {
+            wishlist = lists[i];
+            break;
+        }
+    }
+    
+    let items = [];
+    try {
+        items = wishlist.reminders;
+    } catch (e) {
+        console.log("Error getting reminders:", e);
+    }
+    let result = [];
+    
+    for (var j = 0; j < items.length; j++) {
+        result.push({
+            title: items[j].name(),
+            description: items[j].body() || ""
+        });
+    }
+    
+    return result;
+}
+
+function run() {
+    const reminders = getReminders();
+    return JSON.stringify(reminders, null, 2);
+}

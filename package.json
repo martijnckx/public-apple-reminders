@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "main": "update-reminders.js",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.744.0",
+    "dotenv": "^16.4.7"
+  }
+}
